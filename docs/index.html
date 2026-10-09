@@ -37,17 +37,35 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 
 /* top bar */
-.top{display:flex;align-items:center;gap:22px;padding:22px 28px}
-.top img{width:120px;height:120px;flex:none;display:block}
-.top h1{font-family:var(--head);font-weight:900;font-size:clamp(20px,3.6vw,34px);letter-spacing:.06em;margin:0;line-height:1.05}
+.top{display:flex;align-items:center;gap:30px;padding:28px 32px 24px}
+.top img{width:200px;height:200px;flex:none;display:block}
+.top h1{font-family:var(--head);font-weight:900;font-size:clamp(26px,5.4vw,60px);letter-spacing:.06em;margin:0;line-height:1.05}
 .top h1 b{color:var(--ares);font-weight:900}
-.top .sub{color:var(--mute);margin-top:8px;letter-spacing:.06em;font-size:13px}
+.top .sub{color:var(--mute);margin-top:14px;letter-spacing:.08em;font-size:17px}
 .top a{text-decoration:none}
+
+/* persistent nav bar (sticky on every page) */
+.navbar{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.92);backdrop-filter:blur(6px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.navbar .in{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none}
+.navbar .in::-webkit-scrollbar{display:none}
+.navbar .brand{display:none;align-items:center;gap:10px;margin-right:14px;font-family:var(--head);font-weight:900;font-size:12px;letter-spacing:.14em;white-space:nowrap;text-decoration:none}
+.navbar.stuck .brand{display:flex}
+.navbar .brand img{width:28px;height:28px}
+.navbar .brand b{color:var(--ares)}
+.navbar a.tab{display:block;padding:15px 14px 13px;text-decoration:none;font-family:var(--head);font-weight:700;font-size:12px;letter-spacing:.14em;
+  color:var(--mute);border-bottom:2px solid transparent;white-space:nowrap}
+.navbar a.tab small{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.04em;margin-left:6px;color:var(--spine)}
+.navbar a.tab:hover{color:var(--yellow)}
+.navbar a.tab[aria-current=page]{color:var(--ink);border-bottom-color:var(--ares)}
+.navbar a.tab.newest:not([aria-current=page]){color:var(--ink)}
+.navbar .sp{flex:1}
+.navbar a.ext{color:var(--mute)}
 
 /* ---------- page 1: timeline ---------- */
 .tl{position:relative;max-width:980px;margin:10px auto 0;padding:40px 16px 60px}
 .tl:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;
-  background:linear-gradient(transparent,var(--blue) 40px,var(--green) 50%,var(--ares) calc(100% - 40px),transparent);opacity:.75}
+  background:linear-gradient(transparent,var(--ares) 40px,var(--green) 50%,var(--blue) calc(100% - 40px),transparent);opacity:.75}
 .ev{position:relative;display:flex;min-height:150px;margin-bottom:36px}
 /* desktop: JS stacks entries so left/right interleave (see layout()) */
 .tl.packed .ev{position:absolute;left:16px;right:16px;margin:0;min-height:0}
@@ -65,7 +83,7 @@ button{font:inherit;color:inherit}
 .entry .id{font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--mute);margin-top:4px}
 .entry:hover .d,.entry:focus-visible .d{color:#fff;text-shadow:0 0 12px var(--ares)}
 .ev:has(.entry:hover) .knot{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 14px var(--yellow)}
-.ev.last .knot{background:var(--ares);border-color:var(--ares)}
+.ev.newest .knot{background:var(--ares);border-color:var(--ares)}
 .ev:has(.entry:hover) .arm{background:var(--yellow)}
 .notes{margin-top:10px;border-left:2px solid var(--line);padding:4px 0 4px 12px}
 .notes .k{font-family:var(--head);font-weight:700;font-size:10px;letter-spacing:.2em;color:var(--yellow);margin-bottom:4px}
@@ -104,7 +122,11 @@ li.gone{color:var(--mute);text-decoration:line-through}
 
 @media (max-width:700px){
   .top{padding:16px}
-  .top img{width:84px;height:84px}
+  .top{gap:16px}
+  .navbar a.tab{padding:14px 10px 12px}
+  .navbar a.tab small,.navbar .brand span{display:none}
+  .top img{width:96px;height:96px}
+  .top .sub{font-size:13px;margin-top:8px}
   .tl:before{left:26px}
   .ev,.ev.l,.ev.r{justify-content:flex-start;min-height:0;padding-bottom:36px}
   .ev .knot{left:10px;margin-left:-7px}
@@ -125,6 +147,7 @@ li.gone{color:var(--mute);text-decoration:line-through}
     <div class="sub">MSVtx &middot; NN1 / NN2 input features</div>
   </div>
 </header>
+<nav class="navbar" id="navbar" aria-label="Versions"><div class="in" id="navin"></div></nav>
 <main id="app"></main>
 
 <script src="data.js"></script>
@@ -143,9 +166,9 @@ function notes(v){
 }
 function timeline(){
   let h='<div class="tl">';
-  V.forEach((v,i)=>{
+  [...V].reverse().forEach((v,i)=>{          // newest on top
     const side=i%2?'r':'l', n=(net,reg)=>conf(v,net,reg).length;
-    h+=`<div class="ev ${side}${i===V.length-1?' last':''}"><div class="arm"></div><div class="knot"></div>
+    h+=`<div class="ev ${side}${i===0?' newest':''}"><div class="arm"></div><div class="knot"></div>
       <button class="entry" data-id="${v.id}" aria-label="Open ${esc(v.id)}">
         <div class="d">${esc(v.date_display||v.date)}</div>
         <div class="row n1">NN1 &nbsp;<span>${n('NN1','barrel')} &middot; ${n('NN1','endcap')}</span></div>
@@ -163,9 +186,8 @@ function timeline(){
 function features(id){
   const i=idx(id), v=V[i], p=V[i-1], nx=V[i+1];
   let h=`<div class="pg"><div class="nav">
-    <button data-go="">&larr; TIMELINE</button>
-    <span><button data-go="${p?p.id:''}" ${p?'':'disabled'}>&lsaquo; ${p?esc(p.id.toUpperCase()):'—'}</button>
-    &nbsp;&nbsp;<button data-go="${nx?nx.id:''}" ${nx?'':'disabled'}>${nx?esc(nx.id.toUpperCase()):'—'} &rsaquo;</button></span></div>
+    <button data-go="${nx?nx.id:''}" ${nx?'':'disabled'}>&lsaquo; NEWER${nx?' &middot; '+esc(nx.id.toUpperCase()):''}</button>
+    <button data-go="${p?p.id:''}" ${p?'':'disabled'}>${p?esc(p.id.toUpperCase())+' &middot; ':''}OLDER &rsaquo;</button></div>
     <div class="vh"><div class="d">${esc(v.id.toUpperCase())} &middot; ${esc(v.date_display||v.date)}</div><div class="nm">${esc(v.name||'')}</div>${notes(v)}</div>
     <div class="dl"><span class="k">DOWNLOAD</span><button data-fmt="txt">.txt</button><button data-fmt="csv">.csv</button><button data-fmt="py">.py</button></div>`;
   for(const net of NETS){
@@ -238,8 +260,22 @@ function layout(){
 window.addEventListener('resize',layout);
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(layout);
 
+function navbar(cur){
+  const tabs=[`<a class="tab" href="#" ${cur?'':'aria-current="page"'}>TIMELINE</a>`]
+    .concat([...V].reverse().map((v,i)=>`<a class="tab${i===0?' newest':''}" href="#${v.id}" ${cur===v.id?'aria-current="page"':''}>${esc(v.id.toUpperCase())}<small>${esc(v.date_display||v.date)}</small></a>`));
+  document.getElementById('navin').innerHTML=
+    `<a class="brand" href="#" aria-label="Timeline"><img src="favicon.svg" alt=""><span>NN <b>GENEALOGY</b></span></a>`+tabs.join('')+
+    `<span class="sp"></span><a class="tab ext" href="https://github.com/N-Herling-Mk1/atlas_nn_genealogy" target="_blank" rel="noopener">REPO &#8599;</a>`;
+}
+// show the compact brand in the bar once the big header has scrolled away
+(function(){
+  const bar=document.getElementById('navbar'), top=document.querySelector('.top');
+  if('IntersectionObserver' in window) new IntersectionObserver(([e])=>bar.classList.toggle('stuck',!e.isIntersecting)).observe(top);
+})();
+
 function route(){
   const id=decodeURIComponent(location.hash.slice(1));
+  navbar(idx(id)>=0?id:'');
   if(idx(id)>=0){features(id);document.title=`${id.toUpperCase()} · NN Feature Genealogy`;}
   else{timeline();layout();document.title='NN Feature Genealogy';}
   window.scrollTo(0,0);
