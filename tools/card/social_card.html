@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- social card source: 1280x640. Render with tools/card/render_card.py -> docs/assets/social_card.png -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--ares:#e8230a;--cyan:#6fe3ef;--blue:#2f8cff;--ink:#f3f5f7;--mute:#8a96a3;--line:#26313b}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1280px;height:640px;background:#000;overflow:hidden}
+.card{position:relative;width:1280px;height:640px;color:var(--ink);font-family:'Share Tech Mono',monospace;
+  background:
+    radial-gradient(ellipse 620px 520px at 330px 320px, rgba(47,140,255,.10), transparent 70%),
+    linear-gradient(var(--line) 1px,transparent 1px) 0 0/40px 40px,
+    linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/40px 40px, #000;}
+.card:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.55) 48%,rgba(0,0,0,.82) 100%)}
+.badge{position:absolute;left:24px;top:16px;width:608px;height:608px;z-index:1;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent),linear-gradient(transparent,#000 5%,#000 95%,transparent);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent),linear-gradient(transparent,#000 5%,#000 95%,transparent);
+  mask-composite:intersect}
+.txt{position:absolute;left:640px;top:72px;right:64px;z-index:2}
+.kick{font-size:20px;letter-spacing:.22em;color:var(--cyan)}
+h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:64px;line-height:1.02;letter-spacing:.03em;margin-top:22px}
+h1 b{color:var(--ares);display:block}
+.sub{font-size:22px;color:var(--mute);margin-top:22px;letter-spacing:.04em}
+.rail{display:flex;justify-content:space-between;position:relative;margin-top:52px;width:520px}
+.rail:before{content:"";position:absolute;left:28px;right:28px;top:21px;height:2px;background:#4a5661}
+.node{position:relative;text-align:center;width:120px}
+.dot{width:42px;height:42px;margin:0 auto 12px;border:2px solid var(--ink);background:#000;transform:rotate(45deg);display:grid;place-items:center}
+.dot span{transform:rotate(-45deg);font-family:'Orbitron';font-weight:900;font-size:12px}
+.node.on .dot{background:var(--ares);border-color:var(--ares)}
+.lab{font-family:'Orbitron';font-weight:900;font-size:14px;letter-spacing:.12em}
+.node.on .lab{color:var(--ares)}
+.foot{position:absolute;left:640px;bottom:46px;right:64px;z-index:2;display:flex;justify-content:space-between;font-size:17px;color:var(--mute);border-top:1px solid #3a4550;padding-top:16px}
+.foot em{color:var(--ink);font-style:normal}
+.bar{position:absolute;left:0;right:0;bottom:0;height:6px;z-index:3;background:linear-gradient(90deg,var(--blue),var(--cyan) 45%,var(--ares))}
+</style></head>
+<body><div class="card">
+  <img class="badge" src="../../assets/badge.png" alt="">
+  <div class="txt">
+    <div class="kick">UA ATLAS &middot; RUN-3 LLP &middot; MSVtx</div>
+    <h1>NN FEATURE<b>GENEALOGY</b></h1>
+    <div class="sub">NN1 / NN2 &middot; barrel / endcap</div>
+    <div class="rail">
+      <div class="node"><div class="dot"><span>MK2</span></div><div class="lab">JUN 26</div></div>
+      <div class="node"><div class="dot"><span>MK3</span></div><div class="lab">JUL 26</div></div>
+      <div class="node on"><div class="dot"><span>MK4</span></div><div class="lab">SEP 26</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>N-Herling-Mk1 / <em>atlas_nn_genealogy</em></span><span>.txt &middot; .csv &middot; .py</span></div>
+  <div class="bar"></div>
+</div></body></html>

@@ -1,0 +1,813 @@
+{
+ "features": [
+  {
+   "canonical": "nMSeg_ratio_BIBM",
+   "variants": [],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 1,
+   "note": "inner/middle MDT segment ratio"
+  },
+  {
+   "canonical": "track_scalar_sum_pt_barrel",
+   "variants": [],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 2,
+   "note": "scalar sum ID track pT in cone"
+  },
+  {
+   "canonical": "MS1Vtx_clusE",
+   "variants": [
+    "MS1Vtx_clusE_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 3,
+   "note": "total calo topocluster E (dR<0.4)"
+  },
+  {
+   "canonical": "MS1Vtx_avg_clusE",
+   "variants": [
+    "MS1Vtx_avg_clusE_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 4,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_rms_clusE",
+   "variants": [
+    "MS1Vtx_rms_clusE_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 5,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_maxclusE",
+   "variants": [
+    "MS1Vtx_maxclusE_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 6,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l1ecal",
+   "variants": [
+    "MS1Vtx_l1ecal_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 7,
+   "note": "calo cluster E, 4 EM + 4 HAD layers"
+  },
+  {
+   "canonical": "MS1Vtx_l1hcal",
+   "variants": [
+    "MS1Vtx_l1hcal_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 8,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l2ecal",
+   "variants": [
+    "MS1Vtx_l2ecal_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 9,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l2hcal",
+   "variants": [
+    "MS1Vtx_l2hcal_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 10,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l3ecal",
+   "variants": [
+    "MS1Vtx_l3ecal_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 11,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l3hcal",
+   "variants": [
+    "MS1Vtx_l3hcal_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 12,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l4ecal",
+   "variants": [
+    "MS1Vtx_l4ecal_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 13,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l4hcal",
+   "variants": [
+    "MS1Vtx_l4hcal_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 14,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_mindR_jetcut",
+   "variants": [
+    "MS1Vtx_mindR_jetcut_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 15,
+   "note": "high-pT track+jet isolation KJ: why peak at pi? 2-jet events; investigate"
+  },
+  {
+   "canonical": "MS1Vtx_sumTrackPt0p2Cone",
+   "variants": [
+    "MS1Vtx_sumTrackPt0p2Cone_raw"
+   ],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 16,
+   "note": "low-pT track isolation (dR<0.2)"
+  },
+  {
+   "canonical": "msvtx_caloClusterSumPtScalar",
+   "variants": [],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 17,
+   "note": "[KJ row 17]"
+  },
+  {
+   "canonical": "msegUnAssoc_counts/nBIL",
+   "variants": [],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 18,
+   "note": "[KJ row 18] unassoc-seg / chamber-count ratio"
+  },
+  {
+   "canonical": "msegUnAssoc_counts/nBML",
+   "variants": [],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 19,
+   "note": "[KJ row 19]"
+  },
+  {
+   "canonical": "msegUnAssoc_counts/nBOL",
+   "variants": [],
+   "net": "NN1",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 20,
+   "note": "[KJ row 20]"
+  },
+  {
+   "canonical": "MSTracklet_barrel_avg_dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 1,
+   "note": "avg dR(MSVtx, tracklets)"
+  },
+  {
+   "canonical": "MSTracklet_barrel_rms_dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 2,
+   "note": "rms dR(MSVtx, tracklets)"
+  },
+  {
+   "canonical": "MSeg_barrel_avg_dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 3,
+   "note": "avg dR(MSVtx, muon segments)"
+  },
+  {
+   "canonical": "MSeg_barrel_rms_dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 4,
+   "note": "rms dR(MSVtx, muon segments)"
+  },
+  {
+   "canonical": "MS1Vtx_barrel_hits_ntot",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 5,
+   "note": "total MDT + trigger hits"
+  },
+  {
+   "canonical": "MSVtx_MET_dphi",
+   "variants": [
+    "MSVtx_MET_dphi_raw"
+   ],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 6,
+   "note": "dphi(MSVtx, MET)"
+  },
+  {
+   "canonical": "MS1Vtx_maxclustime",
+   "variants": [
+    "MS1Vtx_maxclustime_raw"
+   ],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 7,
+   "note": "calo topocluster time (dR<0.4)"
+  },
+  {
+   "canonical": "MS1Vtx_avg_clustime",
+   "variants": [
+    "MS1Vtx_avg_clustime_raw"
+   ],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 8,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_rms_clustime",
+   "variants": [
+    "MS1Vtx_rms_clustime_raw"
+   ],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 9,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_nTracklet",
+   "variants": [
+    "MS1Vtx_nTracklet_raw"
+   ],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "confirmed",
+   "position": 10,
+   "note": "# tracklets in cone"
+  },
+  {
+   "canonical": "nMSeg_ratio_EIEM",
+   "variants": [],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 1,
+   "note": ""
+  },
+  {
+   "canonical": "track_scalar_sum_pt_endcap",
+   "variants": [],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 2,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_clusE",
+   "variants": [
+    "MS1Vtx_clusE_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 3,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_avg_clusE",
+   "variants": [
+    "MS1Vtx_avg_clusE_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 4,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_rms_clusE",
+   "variants": [
+    "MS1Vtx_rms_clusE_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 5,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_maxclusE",
+   "variants": [
+    "MS1Vtx_maxclusE_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 6,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l1ecal",
+   "variants": [
+    "MS1Vtx_l1ecal_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 7,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l1hcal",
+   "variants": [
+    "MS1Vtx_l1hcal_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 8,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l2ecal",
+   "variants": [
+    "MS1Vtx_l2ecal_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 9,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l2hcal",
+   "variants": [
+    "MS1Vtx_l2hcal_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 10,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l3ecal",
+   "variants": [
+    "MS1Vtx_l3ecal_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 11,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l3hcal",
+   "variants": [
+    "MS1Vtx_l3hcal_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 12,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l4ecal",
+   "variants": [
+    "MS1Vtx_l4ecal_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 13,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_l4hcal",
+   "variants": [
+    "MS1Vtx_l4hcal_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 14,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_mindR_jetcut",
+   "variants": [
+    "MS1Vtx_mindR_jetcut_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 15,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_sumTrackPt0p2Cone",
+   "variants": [
+    "MS1Vtx_sumTrackPt0p2Cone_raw"
+   ],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 16,
+   "note": ""
+  },
+  {
+   "canonical": "MSTracklet_endcap_avg_dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 1,
+   "note": ""
+  },
+  {
+   "canonical": "MSTracklet_endcap_rms_dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 2,
+   "note": ""
+  },
+  {
+   "canonical": "MSeg_endcap_avg_dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 3,
+   "note": ""
+  },
+  {
+   "canonical": "MSeg_endcap_rms_dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 4,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_endcap_hits_ntot",
+   "variants": [],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 5,
+   "note": ""
+  },
+  {
+   "canonical": "MSVtx_MET_dphi",
+   "variants": [
+    "MSVtx_MET_dphi_raw"
+   ],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 6,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_maxclustime",
+   "variants": [
+    "MS1Vtx_maxclustime_raw"
+   ],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 7,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_avg_clustime",
+   "variants": [
+    "MS1Vtx_avg_clustime_raw"
+   ],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 8,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_rms_clustime",
+   "variants": [
+    "MS1Vtx_rms_clustime_raw"
+   ],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 9,
+   "note": ""
+  },
+  {
+   "canonical": "MS1Vtx_nTracklet",
+   "variants": [
+    "MS1Vtx_nTracklet_raw"
+   ],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "confirmed",
+   "position": 10,
+   "note": ""
+  },
+  {
+   "canonical": "met_met_NOSYS",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "candidate",
+   "position": null,
+   "note": "KJ: \"add?\"          [sheet NN2 row 1]"
+  },
+  {
+   "canonical": "msvtx_nRPC",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "candidate",
+   "position": null,
+   "note": "listed, no nn2 tag  [sheet NN2 row 2]"
+  },
+  {
+   "canonical": "msvtx_caloClusterSumPtScalar",
+   "variants": [],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "candidate",
+   "position": null,
+   "note": "region-agnostic; KJ barrel row 17"
+  },
+  {
+   "canonical": "msegUnAssoc_counts/nEIL",
+   "variants": [],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "candidate",
+   "position": null,
+   "note": "endcap twin of KJ barrel row 18"
+  },
+  {
+   "canonical": "msegUnAssoc_counts/nEML",
+   "variants": [],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "candidate",
+   "position": null,
+   "note": "endcap twin of KJ barrel row 19"
+  },
+  {
+   "canonical": "msegUnAssoc_counts/nEOL",
+   "variants": [],
+   "net": "NN1",
+   "region": "endcap",
+   "status": "candidate",
+   "position": null,
+   "note": "endcap twin of KJ barrel row 20"
+  },
+  {
+   "canonical": "met_met_NOSYS",
+   "variants": [],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "candidate",
+   "position": null,
+   "note": "region-agnostic candidate"
+  },
+  {
+   "canonical": "msvtx_nRPC",
+   "variants": [],
+   "net": "NN2",
+   "region": "endcap",
+   "status": "candidate",
+   "position": null,
+   "note": "barrel-hardware count; endcap use = KJ question"
+  },
+  {
+   "canonical": "number of clusters in dR",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "proposed",
+   "position": null,
+   "note": "[sheet NN2 row 13]"
+  },
+  {
+   "canonical": "eta-phi of pt weighted clusters",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "proposed",
+   "position": null,
+   "note": "[sheet NN2 row 14]"
+  },
+  {
+   "canonical": "number of clusters < 300 MeV",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "proposed",
+   "position": null,
+   "note": "[sheet NN2 row 15]"
+  },
+  {
+   "canonical": "% of clusters < 300 MeV",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "proposed",
+   "position": null,
+   "note": "[sheet NN2 row 16]"
+  },
+  {
+   "canonical": "NSW segment variables",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "proposed",
+   "position": null,
+   "note": "[sheet NN2 row 17] (endcap hardware? -- KJ)"
+  },
+  {
+   "canonical": "njets",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "proposed",
+   "position": null,
+   "note": "[sheet NN2 row 18]"
+  },
+  {
+   "canonical": "pt of closest dr jet",
+   "variants": [],
+   "net": "NN2",
+   "region": "barrel",
+   "status": "proposed",
+   "position": null,
+   "note": "[sheet NN2 row 19]"
+  }
+ ],
+ "selection": {
+  "barrel": [
+   [
+    "MS1Vtx_barrel_hits_nRPC",
+    ">",
+    800
+   ],
+   [
+    "nMSeg_BO",
+    ">",
+    15
+   ],
+   [
+    "MS1Vtx_mindR_jetcut",
+    ">",
+    0.8
+   ],
+   [
+    "MS1Vtx_sumTrackPt0p2Cone",
+    "<",
+    5
+   ],
+   [
+    "pass_muonRoItrigger",
+    "==",
+    1
+   ],
+   [
+    "pass_trigger_match",
+    "==",
+    1
+   ]
+  ],
+  "endcap": [
+   [
+    "MS1Vtx_endcap_hits_nTGC",
+    ">",
+    900
+   ],
+   [
+    "nMSeg_EO",
+    ">",
+    15
+   ],
+   [
+    "MS1Vtx_mindR_jetcut",
+    ">",
+    0.8
+   ],
+   [
+    "MS1Vtx_sumTrackPt0p2Cone",
+    "<",
+    5
+   ],
+   [
+    "pass_muonRoItrigger",
+    "==",
+    1
+   ],
+   [
+    "pass_trigger_match",
+    "==",
+    1
+   ]
+  ]
+ },
+ "target": {
+  "column": "bdt_target",
+  "signal": 0,
+  "background": 1
+ },
+ "provenance": {
+  "NN1": {
+   "family": "Energy / Isolation",
+   "detail": "calo topocluster energy (total/avg/rms/max + per-layer ECAL/HCAL), track/jet isolation, segment-ratio activity",
+   "ref": "Schott thesis Sec. 8.3.2 (NN1 feature set)"
+  },
+  "NN2": {
+   "family": "Spatial-dR / Timing / Hits",
+   "detail": "dR(MSVtx, tracklets & muon segments), total MDT+trigger hits, topocluster timing, dphi(MSVtx,MET), tracklet multiplicity",
+   "ref": "Schott thesis Sec. 8.3.2 (NN2 feature set)"
+  }
+ },
+ "id": "mk3",
+ "label": "July 2026",
+ "date": "2026-07",
+ "summary": "Prof. Johns July sheet: 4 new barrel NN1 features; candidates and conceptual proposals tracked separately.",
+ "source": "sources/nn_features_mk3_v3.py",
+ "questions": [
+  "Barrel NN2: adopt met_met_NOSYS ('add?') and msvtx_nRPC (untagged)?",
+  "Endcap NN1: adopt msvtx_caloClusterSumPtScalar + nEIL/nEML/nEOL twins?",
+  "'NSW segment variables' -- endcap hardware? which columns?",
+  "msvtx_nRPC is barrel trigger hardware -- intended for endcap at all?"
+ ]
+}
