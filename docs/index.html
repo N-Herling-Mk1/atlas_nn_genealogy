@@ -81,7 +81,22 @@ button{font:inherit;color:inherit}
 .entry .row span{color:var(--ink)}
 .entry .nm{color:var(--yellow)}
 .entry .id{font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--mute);margin-top:4px}
-.entry:hover .d,.entry:focus-visible .d{color:#fff;text-shadow:0 0 12px var(--ares)}
+/* hover flare: framed, glowing head block (date / counts / name / id) -- notes untouched */
+.entry .head{position:relative;padding:10px 16px 8px;margin:-10px -16px -8px;border:1px solid transparent;border-radius:12px;
+  transition:border-color .18s,box-shadow .18s,background .18s}
+.entry .head>*{transition:text-shadow .18s,color .18s}
+.entry:hover .head,.entry:focus-visible .head{border-color:rgba(255,210,63,.75);background:rgba(255,255,255,.025);
+  box-shadow:0 0 0 1px rgba(255,210,63,.18),0 0 22px rgba(255,210,63,.28),inset 0 0 20px rgba(255,210,63,.07)}
+.entry:hover .head:before,.entry:hover .head:after,.entry:focus-visible .head:before,.entry:focus-visible .head:after{
+  content:"";position:absolute;width:14px;height:14px;border:2px solid var(--yellow);pointer-events:none}
+.entry:hover .head:before,.entry:focus-visible .head:before{left:-5px;top:-5px;border-right:0;border-bottom:0;border-top-left-radius:6px}
+.entry:hover .head:after,.entry:focus-visible .head:after{right:-5px;bottom:-5px;border-left:0;border-top:0;border-bottom-right-radius:6px}
+.entry:hover .d,.entry:focus-visible .d{color:#fff;text-shadow:0 0 1px #fff,0 0 8px var(--ares),0 0 18px var(--ares),0 0 30px rgba(232,35,10,.6)}
+.entry:hover .row.n1,.entry:focus-visible .row.n1{text-shadow:0 0 6px var(--blue),0 0 14px var(--blue)}
+.entry:hover .row.n2,.entry:focus-visible .row.n2{text-shadow:0 0 6px var(--green),0 0 14px var(--green)}
+.entry:hover .row span,.entry:focus-visible .row span{color:#fff;text-shadow:0 0 6px rgba(255,255,255,.8)}
+.entry:hover .nm,.entry:focus-visible .nm{text-shadow:0 0 6px var(--yellow),0 0 14px rgba(255,210,63,.7)}
+.entry:hover .id,.entry:focus-visible .id{color:var(--ink);text-shadow:0 0 8px rgba(255,255,255,.6)}
 .ev:has(.entry:hover) .knot{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 14px var(--yellow)}
 .ev.newest .knot{background:var(--ares);border-color:var(--ares)}
 .ev:has(.entry:hover) .arm{background:var(--yellow)}
@@ -170,11 +185,11 @@ function timeline(){
     const side=i%2?'r':'l', n=(net,reg)=>conf(v,net,reg).length;
     h+=`<div class="ev ${side}${i===0?' newest':''}"><div class="arm"></div><div class="knot"></div>
       <button class="entry" data-id="${v.id}" aria-label="Open ${esc(v.id)}">
-        <div class="d">${esc(v.date_display||v.date)}</div>
+        <div class="head"><div class="d">${esc(v.date_display||v.date)}</div>
         <div class="row n1">NN1 &nbsp;<span>${n('NN1','barrel')} &middot; ${n('NN1','endcap')}</span></div>
         <div class="row n2">NN2 &nbsp;<span>${n('NN2','barrel')} &middot; ${n('NN2','endcap')}</span></div>
         <div class="nm">${esc(v.name||'')}</div>
-        <div class="id">${esc(v.id.toUpperCase())}</div>
+        <div class="id">${esc(v.id.toUpperCase())}</div></div>
         ${notes(v)}
       </button></div>`;
   });
