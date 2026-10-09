@@ -24,356 +24,194 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#ffffff; --panel:#fafafa; --ink:#111417; --mute:#6b7177; --line:#e4e6e8; --line2:#c9cdd1;
-  --ares:#e8230a; --ares-soft:#fdece9;
-  --cand:#9a6a00; --cand-soft:#fff6e0; --prop:#5b6470; --prop-soft:#f1f3f5;
-  --ok:#1d7a3a; --bad:#e8230a;
+  --bg:#000; --ink:#e9eef2; --mute:#7d8a96; --line:#2a333c; --spine:#4a5661;
+  --ares:#e8230a; --cyan:#6fe3ef;
+  --blue:#4da3ff; --green:#3ddc84; --yellow:#ffd23f;   /* highlights: NN1 / NN2 / NEW + names */
   --mono:'Share Tech Mono',ui-monospace,Consolas,monospace; --head:'Orbitron',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
-header{padding:28px 0 20px;border-bottom:3px solid var(--ink);display:flex;gap:20px;align-items:center}
-.badge{width:96px;height:96px;flex:none;border-radius:50%;background:#000}
-@media (max-width:620px){.badge{width:64px;height:64px}}
-h1{font-family:var(--head);font-weight:900;font-size:clamp(22px,4.4vw,36px);letter-spacing:.06em;margin:0;line-height:1.05}
-h1 b{color:var(--ares)}
-.sub{color:var(--mute);margin-top:8px;letter-spacing:.04em}
-h2{font-family:var(--head);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 10px}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:15px}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 
-/* version rail */
-.rail{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0;margin:26px 0 8px;position:relative}
-.rail:before{content:"";position:absolute;left:8%;right:8%;top:17px;height:2px;background:var(--line2)}
-.node{background:none;border:0;padding:0 6px;cursor:pointer;text-align:center;font:inherit;color:inherit;position:relative}
-.node .dot{width:36px;height:36px;margin:0 auto 8px;border:2px solid var(--ink);background:var(--bg);display:grid;place-items:center;font-family:var(--head);font-weight:900;font-size:11px;transform:rotate(45deg)}
-.node .dot span{transform:rotate(-45deg)}
-.node .lab{font-family:var(--head);font-weight:700;font-size:12px;letter-spacing:.1em}
-.node .meta{color:var(--mute);font-size:12px;margin-top:2px}
-.node[aria-pressed=true] .dot{background:var(--ares);border-color:var(--ares);color:#fff}
-.node[aria-pressed=true] .lab{color:var(--ares)}
-.node:focus-visible{outline:2px solid var(--ares);outline-offset:4px}
+/* top bar */
+.top{display:flex;align-items:center;gap:22px;padding:22px 28px}
+.top img{width:120px;height:120px;flex:none;display:block}
+.top h1{font-family:var(--head);font-weight:900;font-size:clamp(20px,3.6vw,34px);letter-spacing:.06em;margin:0;line-height:1.05}
+.top h1 b{color:var(--ares);font-weight:900}
+.top .sub{color:var(--mute);margin-top:8px;letter-spacing:.06em;font-size:13px}
+.top a{text-decoration:none}
 
-.vinfo{border-left:3px solid var(--ares);padding:4px 0 4px 14px;margin:18px 0 6px;line-height:1.55}
-.vinfo a{color:var(--ink)}
-details.q{margin:10px 0 0}
-details.q summary{cursor:pointer;color:var(--ares);letter-spacing:.06em}
-details.q ol{margin:8px 0 0;padding-left:22px;line-height:1.55;color:#33393f}
+/* ---------- page 1: timeline ---------- */
+.tl{position:relative;max-width:980px;margin:10px auto 0;padding:40px 16px 60px}
+.tl:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;
+  background:linear-gradient(transparent,var(--blue) 40px,var(--green) 50%,var(--ares) calc(100% - 40px),transparent);opacity:.75}
+.ev{position:relative;display:flex;min-height:150px}
+.ev .arm{position:absolute;top:34px;height:3px;background:var(--spine)}
+.ev .knot{position:absolute;left:50%;top:27px;width:17px;height:17px;margin-left:-8.5px;background:#000;border:3px solid var(--ink);transform:rotate(45deg)}
+.ev.l{justify-content:flex-start} .ev.r{justify-content:flex-end}
+.ev.l .arm{left:30%;right:50%} .ev.r .arm{left:50%;right:30%}
+.entry{width:30%;text-align:left;background:none;border:0;padding:0;cursor:pointer;line-height:1.55}
+.ev.l .entry{padding-right:18px} .ev.r .entry{padding-left:18px}
+.entry .d{font-family:var(--head);font-weight:900;font-size:17px;letter-spacing:.08em;color:var(--ares)}
+.entry .row{font-size:15px;letter-spacing:.04em}
+.entry .row.n1{color:var(--blue)} .entry .row.n2{color:var(--green)}
+.entry .row span{color:var(--ink)}
+.entry .nm{color:var(--yellow)}
+.entry .id{font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--mute);margin-top:4px}
+.entry:hover .d,.entry:focus-visible .d{color:#fff;text-shadow:0 0 12px var(--ares)}
+.ev:has(.entry:hover) .knot{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 14px var(--yellow)}
+.ev.last .knot{background:var(--ares);border-color:var(--ares)}
+.ev:has(.entry:hover) .arm{background:var(--yellow)}
+.key{text-align:center;color:var(--mute);font-size:12px;letter-spacing:.08em;margin:0 0 70px}
 
-/* controls */
-.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 0;margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
-.grp{display:flex;gap:0;align-items:center}
-.grp .k{color:var(--mute);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-right:8px}
-.tg{border:1px solid var(--line2);background:var(--bg);color:var(--ink);font:inherit;padding:5px 10px;cursor:pointer;margin-left:-1px}
-.tg:first-of-type{margin-left:0}
-.tg[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.tg:focus-visible{outline:2px solid var(--ares);outline-offset:1px;position:relative}
-input[type=search]{font:inherit;border:1px solid var(--line2);padding:5px 10px;min-width:180px;flex:1}
-input[type=search]:focus{outline:2px solid var(--ares);outline-offset:-1px}
+/* ---------- page 2: features ---------- */
+.pg{max-width:980px;margin:0 auto;padding:6px 16px 80px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0}
+.nav button{background:none;border:0;cursor:pointer;letter-spacing:.12em;font-family:var(--head);font-weight:700;font-size:12px;padding:4px 0}
+.nav button:hover{color:var(--yellow)}
+.nav button[disabled]{color:var(--line);cursor:default}
+.vh{margin:30px 0 8px}
+.vh .d{font-family:var(--head);font-weight:900;font-size:clamp(22px,4vw,30px);letter-spacing:.06em;color:var(--ares)}
+.vh .nm{color:var(--yellow);margin-top:6px;letter-spacing:.06em}
+.dl{display:flex;gap:10px;align-items:center;margin:18px 0 6px;flex-wrap:wrap}
+.dl .k{color:var(--mute);font-size:12px;letter-spacing:.14em;margin-right:4px}
+.dl button{background:none;border:1px solid var(--spine);padding:6px 14px;cursor:pointer;letter-spacing:.06em}
+.dl button:hover{border-color:var(--yellow);color:var(--yellow)}
+section.net{margin-top:34px}
+section.net h2{font-family:var(--head);font-weight:900;font-size:20px;letter-spacing:.12em;margin:0 0 12px;border-bottom:2px solid currentColor;padding-bottom:8px}
+section.NN1 h2{color:var(--blue)} section.NN2 h2{color:var(--green)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 34px}
+.cols h3{font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.2em;color:var(--mute);margin:0 0 8px}
+ol{list-style:none;margin:0;padding:0}
+li{display:grid;grid-template-columns:30px 1fr;padding:5px 0;border-bottom:1px solid var(--line);word-break:break-all}
+li .n{color:var(--mute)}
+li.new .f{color:var(--yellow)}
+li.new .f:after{content:"  NEW";font-size:10px;letter-spacing:.14em}
+li.gone{color:var(--mute);text-decoration:line-through}
+.note{color:var(--mute);font-size:12px;margin-top:26px;letter-spacing:.04em}
 
-/* tables */
-.block{margin:26px 0}
-.block h3{font-family:var(--head);font-weight:900;font-size:15px;letter-spacing:.1em;margin:0 0 8px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
-.block h3 small{font-family:var(--mono);font-weight:400;color:var(--mute);font-size:12px;letter-spacing:0}
-.scroll{overflow-x:auto;border:1px solid var(--line)}
-table{border-collapse:collapse;width:100%;min-width:640px}
-th{font-family:var(--head);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink);background:var(--panel);white-space:nowrap}
-td{padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-td.n{color:var(--mute);text-align:right;width:34px}
-td.name{font-size:14px;word-break:break-all}
-td.var{color:var(--mute);font-size:12px;word-break:break-all}
-td.note{color:#3b4248;font-size:12px;line-height:1.45;max-width:320px}
-td.note .kj{display:block;color:var(--ink)}
-td.note .kj:before{content:"KJ ▸ ";color:var(--ares)}
-td.note .nh{display:block;color:var(--mute)}
-td.note .nh:before{content:"NH ▸ "}
-td.note .warn{display:block;color:var(--cand)}
-tr.candidate td{background:var(--cand-soft)}
-tr.proposed td{background:var(--prop-soft);font-style:italic}
-.chip{display:inline-block;font-size:10px;letter-spacing:.1em;padding:1px 6px;border:1px solid currentColor;margin:0 4px 2px 0;white-space:nowrap;font-style:normal}
-.c-confirmed{color:var(--ink)} .c-candidate{color:var(--cand);border-style:dashed} .c-proposed{color:var(--prop);border-style:dotted}
-.c-new{background:var(--ares);color:#fff;border-color:var(--ares)} .c-promo{color:var(--ares)}
-.ck-ok{color:var(--ok)} .ck-bad{color:var(--bad);font-weight:bold} .ck-none{color:var(--mute)}
-.empty{color:var(--mute);padding:14px;border:1px dashed var(--line2)}
-
-/* lineage */
-.lin td.g{text-align:center;font-size:16px;width:70px}
-.g-confirmed{color:var(--ink)} .g-candidate{color:var(--cand)} .g-proposed{color:var(--prop)}
-.legend{color:var(--mute);font-size:12px;margin:6px 0 0}
-
-/* download */
-.dl{border:2px solid var(--ink);padding:16px;margin:34px 0;display:grid;gap:12px}
-.dl .row{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
-.go{font-family:var(--head);font-weight:900;letter-spacing:.12em;background:var(--ares);color:#fff;border:0;padding:10px 18px;cursor:pointer}
-.go:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.dl .scope{color:var(--mute);font-size:12px}
-.dl a{color:var(--ink)}
-pre.preview{margin:0;max-height:220px;overflow:auto;background:var(--panel);border:1px solid var(--line);padding:10px;font-size:12px;white-space:pre}
-footer{border-top:1px solid var(--line);color:var(--mute);font-size:12px;padding:16px 0 40px}
-@media (max-width:620px){ .rail:before{display:none} .node .meta{font-size:11px} }
+@media (max-width:700px){
+  .top{padding:16px}
+  .top img{width:84px;height:84px}
+  .tl:before{left:26px}
+  .ev,.ev.l,.ev.r{justify-content:flex-start;min-height:0;padding-bottom:36px}
+  .ev .knot{left:10px;margin-left:-7px}
+  .ev.l .arm,.ev.r .arm{left:12px;right:auto;width:30px}
+  .entry,.ev.l .entry,.ev.r .entry{width:auto;margin-left:54px;padding:0}
+  .key{text-align:left;padding:0 16px 0 70px}
+  .cols{grid-template-columns:1fr}
+  .cols>div+div{margin-top:20px}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <img class="badge" src="assets/badge_512.jpg" alt="UA ATLAS badge" width="96" height="96">
+<header class="top">
+  <a href="#" aria-label="Timeline"><img src="assets/badge_512.jpg" alt="UA ATLAS badge" width="120" height="120"></a>
   <div>
-  <h1>NN FEATURE <b>GENEALOGY</b></h1>
-  <div class="sub">MSVtx ABCD &middot; NN1 / NN2 &middot; barrel / endcap &middot; ANA-EXOT-2025-24</div>
+    <h1><a href="#">NN FEATURE <b>GENEALOGY</b></a></h1>
+    <div class="sub">MSVtx &middot; NN1 / NN2 input features</div>
   </div>
 </header>
-
-<nav class="rail" id="rail" aria-label="Versions"></nav>
-<section class="vinfo" id="vinfo"></section>
-
-<div class="bar" id="bar">
-  <div class="grp" data-key="view"><span class="k">View</span>
-    <button class="tg" data-v="list">List</button><button class="tg" data-v="lineage">Lineage</button></div>
-  <div class="grp" data-key="net" data-multi><span class="k">Net</span>
-    <button class="tg" data-v="NN1">NN1</button><button class="tg" data-v="NN2">NN2</button></div>
-  <div class="grp" data-key="region" data-multi><span class="k">Region</span>
-    <button class="tg" data-v="barrel">Barrel</button><button class="tg" data-v="endcap">Endcap</button></div>
-  <div class="grp" data-key="status" data-multi><span class="k">Status</span>
-    <button class="tg" data-v="confirmed">Confirmed</button><button class="tg" data-v="candidate">Candidate</button><button class="tg" data-v="proposed">Proposed</button></div>
-  <input type="search" id="q" placeholder="filter feature names…" aria-label="Filter feature names">
-</div>
-
-<main id="main"></main>
-
-<section class="dl" aria-label="Download">
-  <h2>Download</h2>
-  <div class="row">
-    <div class="grp" data-key="fmt"><span class="k">Format</span>
-      <button class="tg" data-v="txt">.txt</button><button class="tg" data-v="csv">.csv</button><button class="tg" data-v="py">.py</button></div>
-    <button class="go" id="go">DOWNLOAD</button>
-  </div>
-  <div class="scope" id="scope"></div>
-  <pre class="preview" id="preview" aria-label="Preview"></pre>
-  <div class="scope" id="srclink"></div>
-</section>
-
-<footer id="foot"></footer>
-</div>
+<main id="app"></main>
 
 <script src="data.js"></script>
 <script>
 (function(){
-const D = window.NN_GENEALOGY;
-if(!D){document.getElementById('main').innerHTML='<p class="empty">data.js missing — run <code>python tools/build.py</code>.</p>';return;}
-const V = D.versions, VID = V.map(v=>v.id);
-const NETS=['NN1','NN2'], REGIONS=['barrel','endcap'], STAT=['confirmed','candidate','proposed'];
-const ORDER={confirmed:0,candidate:1,proposed:2};
-
-let S = {ver:VID[VID.length-1], view:'list', net:['NN1','NN2'], region:['barrel','endcap'],
-         status:['confirmed','candidate'], fmt:'csv', q:''};
-try{ const s=JSON.parse(localStorage.getItem('nn_gen_state')||'null'); if(s) S=Object.assign(S,s); }catch(e){}
-if(!VID.includes(S.ver)) S.ver=VID[VID.length-1];
-const save=()=>{ try{localStorage.setItem('nn_gen_state',JSON.stringify(S));}catch(e){} };
-
+const D=window.NN_GENEALOGY, app=document.getElementById('app');
+if(!D){app.innerHTML='<p class="pg">data.js missing — run python tools/build.py</p>';return;}
+const V=D.versions, NETS=['NN1','NN2'], REG=['barrel','endcap'];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const key=f=>f.net+'|'+f.region+'|'+f.canonical;
-const ver=()=>V.find(v=>v.id===S.ver);
-const prevOf=id=>{const i=VID.indexOf(id);return i>0?V[i-1]:null;};
+const conf=(v,net,reg)=>v.features.filter(f=>f.status==='confirmed'&&f.net===net&&f.region===reg).sort((a,b)=>a.position-b.position);
+const idx=id=>V.findIndex(v=>v.id===id);
 
-// lineage helpers
-function history(k){ return D.genealogy[k]||{}; }
-function firstSeen(k){ const h=history(k); return VID.find(id=>h[id]); }
-function event(f, vid){
-  const p=prevOf(vid); if(!p) return null;
-  const was=history(key(f))[p.id];
-  if(!was) return {cls:'c-new',txt:'NEW'};
-  if(was!==f.status) return {cls:'c-promo',txt:(ORDER[f.status]<ORDER[was]?'▲ ':'▼ ')+was+'→'+f.status};
-  return null;
-}
-function removedSince(vid){
-  const p=prevOf(vid); if(!p) return [];
-  const now=new Set(ver().features.map(key));
-  return p.features.filter(f=>!now.has(key(f)));
-}
-
-function visible(feats){
-  const q=S.q.trim().toLowerCase();
-  return feats.filter(f=>S.net.includes(f.net)&&S.region.includes(f.region)&&S.status.includes(f.status)
-    &&(!q||f.canonical.toLowerCase().includes(q)||(f.variants||[]).some(x=>x.toLowerCase().includes(q))));
-}
-const sorted=a=>a.slice().sort((x,y)=>NETS.indexOf(x.net)-NETS.indexOf(y.net)||REGIONS.indexOf(x.region)-REGIONS.indexOf(y.region)||ORDER[x.status]-ORDER[y.status]||(x.position??999)-(y.position??999));
-
-// ---------- render
-function rail(){
-  const r=document.getElementById('rail'); r.style.setProperty('--n',V.length);
-  r.innerHTML=V.map(v=>{
-    const c=s=>v.features.filter(f=>f.status===s).length;
-    return `<button class="node" data-ver="${v.id}" aria-pressed="${v.id===S.ver}">
-      <div class="dot"><span>${esc(v.id.toUpperCase())}</span></div>
-      <div class="lab">${esc(v.label.toUpperCase())}</div>
-      <div class="meta">${c('confirmed')} conf · ${c('candidate')} cand · ${c('proposed')} prop</div></button>`;}).join('');
-  r.querySelectorAll('.node').forEach(b=>b.onclick=()=>{S.ver=b.dataset.ver;render();});
-}
-function vinfo(){
-  const v=ver(), q=v.questions||[];
-  document.getElementById('vinfo').innerHTML=
-    `<div><b>${esc(v.id)}</b> &middot; ${esc(v.date)} &middot; source <a href="sources/${esc(v.source.split('/').pop())}" download>${esc(v.source.split('/').pop())}</a></div>
-     <div>${esc(v.summary)}</div>`+
-    (q.length?`<details class="q"><summary>${q.length} open question${q.length>1?'s':''}</summary><ol>${q.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></details>`:'');
-}
-function syncToggles(){
-  document.querySelectorAll('.grp[data-key]').forEach(g=>{
-    const k=g.dataset.key, val=S[k];
-    g.querySelectorAll('.tg').forEach(b=>b.setAttribute('aria-pressed', Array.isArray(val)?val.includes(b.dataset.v):val===b.dataset.v));
+function timeline(){
+  let h='<div class="tl">';
+  V.forEach((v,i)=>{
+    const side=i%2?'r':'l', n=(net,reg)=>conf(v,net,reg).length;
+    h+=`<div class="ev ${side}${i===V.length-1?' last':''}"><div class="arm"></div><div class="knot"></div>
+      <button class="entry" data-id="${v.id}" aria-label="Open ${esc(v.id)}">
+        <div class="d">${esc(v.date)}</div>
+        <div class="row n1">NN1 &nbsp;<span>${n('NN1','barrel')} &middot; ${n('NN1','endcap')}</span></div>
+        <div class="row n2">NN2 &nbsp;<span>${n('NN2','barrel')} &middot; ${n('NN2','endcap')}</span></div>
+        <div class="nm">${esc(v.name||'')}</div>
+        <div class="id">${esc(v.id.toUpperCase())}</div>
+      </button></div>`;
   });
-  document.getElementById('q').value=S.q;
+  h+='</div><p class="key">feature counts: barrel &middot; endcap &nbsp;&mdash;&nbsp; select a version</p>';
+  app.innerHTML=h;
+  app.querySelectorAll('.entry').forEach(b=>b.onclick=()=>{location.hash=b.dataset.id;});
 }
-function checkCell(f){
-  if(f.check===undefined) return '';
-  const c=f.check, cls=c==='ok'?'ck-ok':c==='unchecked'?'ck-none':'ck-bad';
-  return `<span class="${cls}">${esc(c)}</span>`;
-}
-function listView(){
-  const v=ver(), hasCheck=v.features.some(f=>f.check!==undefined);
-  let html='';
-  for(const net of NETS) for(const reg of REGIONS){
-    if(!S.net.includes(net)||!S.region.includes(reg)) continue;
-    const all=v.features.filter(f=>f.net===net&&f.region===reg);
-    const rows=sorted(visible(all));
-    const nc=all.filter(f=>f.status==='confirmed').length;
-    const prov=(v.provenance||{})[net]||{};
-    html+=`<div class="block"><h3>${net} &middot; ${reg.toUpperCase()} <small>${nc} confirmed${prov.family?' · '+esc(prov.family):''}</small></h3>`;
-    if(!rows.length){html+='<div class="empty">nothing matches the current filter</div></div>';continue;}
-    html+=`<div class="scroll"><table><thead><tr><th>#</th><th>Feature</th><th>Known variants</th><th>Status</th><th>Since</th>${hasCheck?'<th>Check '+esc(v.check_date||'')+'</th>':''}<th>Notes</th></tr></thead><tbody>`;
-    for(const f of rows){
-      const ev=event(f,v.id), notes=[];
-      if(f.note) notes.push(esc(f.note));
-      if(f.kj_comment) notes.push(`<span class="kj">${esc(f.kj_comment)}</span>`);
-      if(f.kj_tag && !['nn1','nn2'].includes(f.kj_tag)) notes.push(`<span class="kj">tag: ${esc(f.kj_tag)}</span>`);
-      if(f.nh_note) notes.push(`<span class="nh">${esc(f.nh_note)}</span>`);
-      if(f.sheet_name && f.sheet_name!==f.canonical && !f.sheet_name.startsWith(f.canonical)) notes.push(`<span class="warn">sheet spelling: ${esc(f.sheet_name)}</span>`);
-      if(f.unverified_variant) notes.push(`<span class="warn">sheet uses ${esc(f.unverified_variant)} — not in audit</span>`);
-      if(f.check_note) notes.push(`<span class="nh">${esc(f.check_note)}</span>`);
-      html+=`<tr class="${f.status}"><td class="n">${f.position??'·'}</td>
-        <td class="name">${esc(f.canonical)}</td>
-        <td class="var">${(f.variants||[]).map(esc).join('<br>')}</td>
-        <td><span class="chip c-${f.status}">${f.status.toUpperCase()}</span>${ev?`<span class="chip ${ev.cls}">${esc(ev.txt)}</span>`:''}</td>
-        <td>${esc(firstSeen(key(f))||'')}</td>
-        ${hasCheck?`<td>${checkCell(f)}</td>`:''}
-        <td class="note">${notes.join('')}</td></tr>`;
+
+function features(id){
+  const i=idx(id), v=V[i], p=V[i-1], nx=V[i+1];
+  let h=`<div class="pg"><div class="nav">
+    <button data-go="">&larr; TIMELINE</button>
+    <span><button data-go="${p?p.id:''}" ${p?'':'disabled'}>&lsaquo; ${p?esc(p.id.toUpperCase()):'—'}</button>
+    &nbsp;&nbsp;<button data-go="${nx?nx.id:''}" ${nx?'':'disabled'}>${nx?esc(nx.id.toUpperCase()):'—'} &rsaquo;</button></span></div>
+    <div class="vh"><div class="d">${esc(v.id.toUpperCase())} &middot; ${esc(v.date)}</div><div class="nm">${esc(v.name||'')}</div></div>
+    <div class="dl"><span class="k">DOWNLOAD</span><button data-fmt="txt">.txt</button><button data-fmt="csv">.csv</button><button data-fmt="py">.py</button></div>`;
+  for(const net of NETS){
+    h+=`<section class="net ${net}"><h2>${net}</h2><div class="cols">`;
+    for(const reg of REG){
+      const cur=conf(v,net,reg), prev=p?new Set(conf(p,net,reg).map(f=>f.canonical)):null;
+      const gone=p?conf(p,net,reg).filter(f=>!cur.some(c=>c.canonical===f.canonical)):[];
+      h+=`<div><h3>${reg.toUpperCase()} &middot; ${cur.length}</h3><ol>`;
+      cur.forEach(f=>{h+=`<li class="${prev&&!prev.has(f.canonical)?'new':''}"><span class="n">${f.position}</span><span class="f">${esc(f.canonical)}</span></li>`;});
+      gone.forEach(f=>{h+=`<li class="gone"><span class="n">&minus;</span><span class="f">${esc(f.canonical)}</span></li>`;});
+      h+='</ol></div>';
     }
-    html+='</tbody></table></div></div>';
+    h+='</div></section>';
   }
-  const gone=removedSince(S.ver).filter(f=>S.net.includes(f.net)&&S.region.includes(f.region));
-  html+=`<p class="legend">${gone.length?`Removed since ${prevOf(S.ver).id}: ${gone.map(f=>esc(f.net+'/'+f.region+'/'+f.canonical)).join(', ')}`:(prevOf(S.ver)?`Nothing removed since ${prevOf(S.ver).id}.`:'First recorded version.')}</p>`;
-  return html;
-}
-function lineageView(){
-  const glyph={confirmed:'●',candidate:'◐',proposed:'○'};
-  let html='';
-  for(const net of NETS) for(const reg of REGIONS){
-    if(!S.net.includes(net)||!S.region.includes(reg)) continue;
-    const keys=Object.keys(D.genealogy).filter(k=>k.startsWith(net+'|'+reg+'|'));
-    const q=S.q.trim().toLowerCase();
-    const rows=keys.filter(k=>{const h=D.genealogy[k];return Object.values(h).some(s=>S.status.includes(s))&&(!q||k.toLowerCase().includes(q));})
-      .sort((a,b)=>VID.indexOf(firstSeen(a))-VID.indexOf(firstSeen(b)));
-    html+=`<div class="block"><h3>${net} &middot; ${reg.toUpperCase()} <small>${rows.length} lineages</small></h3>`;
-    if(!rows.length){html+='<div class="empty">nothing matches the current filter</div></div>';continue;}
-    html+=`<div class="scroll"><table class="lin"><thead><tr><th>Feature</th>${V.map(v=>`<th style="text-align:center">${esc(v.id)}<br>${esc(v.label)}</th>`).join('')}</tr></thead><tbody>`;
-    for(const k of rows){
-      const h=D.genealogy[k], name=k.split('|').slice(2).join('|');
-      html+=`<tr><td class="name">${esc(name)}</td>${VID.map(id=>`<td class="g g-${h[id]||''}" title="${esc(h[id]||'absent')}">${h[id]?glyph[h[id]]:''}</td>`).join('')}</tr>`;
-    }
-    html+='</tbody></table></div></div>';
-  }
-  return html+'<p class="legend">● confirmed &nbsp; ◐ candidate &nbsp; ○ proposed &nbsp; blank = absent. Rows ordered by first appearance.</p>';
+  h+=p?`<p class="note"><span style="color:var(--yellow)">NEW</span> = not in ${esc(p.id)}. Struck-through = dropped since ${esc(p.id)}.</p>`:'';
+  h+='</div>';
+  app.innerHTML=h;
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.go;});
+  app.querySelectorAll('[data-fmt]').forEach(b=>b.onclick=()=>download(v,b.dataset.fmt));
 }
 
-// ---------- downloads
-function selection(){ return sorted(visible(ver().features)); }
-function fname(ext){
-  const n=S.net.length===2?'NN1NN2':S.net.join(''), r=S.region.length===2?'barrel_endcap':S.region.join('');
-  return `nn_features_${S.ver}_${n}_${r}.${ext}`;
+// ---------- downloads (confirmed features of one version)
+function asTxt(v){
+  const o=[`# nn features ${v.id} (${v.date}) -- ${v.name||''}`];
+  for(const net of NETS)for(const reg of REG){const g=conf(v,net,reg);o.push('',`# ${net} ${reg} (${g.length})`);g.forEach(f=>o.push(f.canonical));}
+  return o.join('\n')+'\n';
 }
-function header(c){
-  const v=ver();
-  return [`${c} nn feature genealogy -- ${v.id} (${v.label}, ${v.date})`,
-          `${c} source : ${v.source}`,
-          `${c} filter : net=${S.net.join(',')} region=${S.region.join(',')} status=${S.status.join(',')}${S.q?` q="${S.q}"`:''}`,
-          `${c} built  : ${D.built}`];
+function asCsv(v){
+  const q=x=>/[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x, r=['version,net,region,position,feature'];
+  for(const net of NETS)for(const reg of REG)conf(v,net,reg).forEach(f=>r.push([v.id,net,reg,f.position,q(f.canonical)].join(',')));
+  return r.join('\r\n')+'\r\n';
 }
-function asTxt(){
-  const out=header('#'), F=selection();
-  for(const net of NETS) for(const reg of REGIONS) for(const st of STAT){
-    const g=F.filter(f=>f.net===net&&f.region===reg&&f.status===st); if(!g.length) continue;
-    out.push('',`# ${net} ${reg} -- ${st} (${g.length})`); g.forEach(f=>out.push(f.canonical));
-  }
-  return out.join('\n')+'\n';
+function asPy(v){
+  const s=JSON.stringify, o=['# -*- coding: utf-8 -*-',`"""nn features ${v.id} (${v.date}) -- ${v.name||''}`,
+    'Entries: "name" or ["canonical", *verified_alternates]  (same as nn_features.py)"""','','NN_FEATURES = {'];
+  for(const reg of REG){o.push(`    ${s(reg)}: {`);
+    for(const net of NETS){o.push(`        ${s(net)}: [`);
+      conf(v,net,reg).forEach(f=>o.push('            '+((f.variants||[]).length?'['+[f.canonical,...f.variants].map(x=>s(x)).join(', ')+']':s(f.canonical))+','));
+      o.push('        ],');}
+    o.push('    },');}
+  o.push('}','','','def features(region, nn):','    """Canonical names for (\'barrel\'|\'endcap\', \'NN1\'|\'NN2\')."""',
+    '    return [e if isinstance(e, str) else e[0] for e in NN_FEATURES[region][nn]]','',
+    'if __name__ == "__main__":','    for r in NN_FEATURES:','        for n in NN_FEATURES[r]:',
+    '            print(f"[{r}] {n}: {len(features(r, n))}")','');
+  return o.join('\n');
 }
-function csvCell(x){x=String(x??'');return /[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x;}
-function asCsv(){
-  const cols=['version','net','region','status','position','canonical','variants','first_seen','check','note','kj_comment','nh_note'];
-  const rows=selection().map(f=>[S.ver,f.net,f.region,f.status,f.position??'',f.canonical,(f.variants||[]).join(';'),firstSeen(key(f)),f.check??'',f.note,f.kj_comment??'',f.nh_note??'']);
-  return [cols,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n')+'\r\n';
+function download(v,fmt){
+  const body=fmt==='txt'?asTxt(v):fmt==='py'?asPy(v):asCsv(v);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([body],{type:'text/plain;charset=utf-8'}));
+  a.download=`nn_features_${v.id}.${fmt}`;
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
 }
-function pyStr(s){return JSON.stringify(s);}
-function asPy(){
-  const F=selection(), out=['# -*- coding: utf-8 -*-','"""',...header('').map(s=>s.trim()),
-    'Same entry convention as nn_features.py:  "name"  or  ["canonical", *verified_alternates]','"""',''];
-  const block=(name,st)=>{
-    out.push(`${name} = {`);
-    for(const reg of REGIONS){ if(!S.region.includes(reg)) continue; out.push(`    ${pyStr(reg)}: {`);
-      for(const net of NETS){ if(!S.net.includes(net)) continue;
-        const g=F.filter(f=>f.net===net&&f.region===reg&&f.status===st);
-        out.push(`        ${pyStr(net)}: [`);
-        g.forEach(f=>{const e=(f.variants&&f.variants.length)?'['+[f.canonical,...f.variants].map(pyStr).join(', ')+']':pyStr(f.canonical);
-          out.push(`            ${e},`+(f.note?`  # ${f.note.replace(/\n/g,' ')}`:''));});
-        out.push('        ],'); }
-      out.push('    },'); }
-    out.push('}','');
-  };
-  block('NN_FEATURES','confirmed');
-  if(S.status.includes('candidate')) block('NN_CANDIDATES','candidate');
-  if(S.status.includes('proposed')) block('NN_PROPOSED','proposed');
-  out.push('','def _canonical(e):','    return e if isinstance(e, str) else e[0]','',
-    'def features(region, nn, include_candidates=False):',
-    '    entries = list(NN_FEATURES.get(region, {}).get(nn, []))',
-    '    if include_candidates:',
-    '        entries += globals().get("NN_CANDIDATES", {}).get(region, {}).get(nn, [])',
-    '    return [_canonical(e) for e in entries]','',
-    'if __name__ == "__main__":',
-    '    for r, nets in NN_FEATURES.items():',
-    '        for n, ents in nets.items():',
-    '            print(f"[{r}] {n}: {len(ents)} confirmed")','');
-  return out.join('\n');
-}
-function content(){ return S.fmt==='txt'?asTxt():S.fmt==='py'?asPy():asCsv(); }
-function dlPanel(){
-  const F=selection();
-  document.getElementById('scope').textContent=`${fname(S.fmt)} — ${F.length} row${F.length!==1?'s':''} (current version + filters)`;
-  const c=content(); document.getElementById('preview').textContent=c.split('\n').slice(0,14).join('\n')+(c.split('\n').length>14?'\n…':'');
-  const v=ver(), base=v.source.split('/').pop();
-  document.getElementById('srclink').innerHTML=`Original source for ${esc(v.id)}: <a href="sources/${esc(base)}" download>${esc(base)}</a>`;
-}
-document.getElementById('go').onclick=()=>{
-  const blob=new Blob([content()],{type:'text/plain;charset=utf-8'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=fname(S.fmt);
-  document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
-};
 
-// ---------- wiring
-document.querySelectorAll('.grp[data-key]').forEach(g=>{
-  const k=g.dataset.key, multi=g.hasAttribute('data-multi');
-  g.querySelectorAll('.tg').forEach(b=>b.onclick=()=>{
-    const v=b.dataset.v;
-    if(multi){ const set=new Set(S[k]); set.has(v)?set.delete(v):set.add(v); if(set.size) S[k]=[...set]; }
-    else S[k]=v;
-    render();
-  });
-});
-document.getElementById('q').oninput=e=>{S.q=e.target.value;render(false);};
-
-function render(full=true){
-  if(full){rail();vinfo();syncToggles();}
-  document.getElementById('main').innerHTML=S.view==='lineage'?lineageView():listView();
-  dlPanel(); save();
+function route(){
+  const id=decodeURIComponent(location.hash.slice(1));
+  if(idx(id)>=0){features(id);document.title=`${id.toUpperCase()} · NN Feature Genealogy`;}
+  else{timeline();document.title='NN Feature Genealogy';}
+  window.scrollTo(0,0);
 }
-document.getElementById('foot').textContent=`built ${D.built} · ${V.length} versions · ${Object.keys(D.genealogy).length} feature lineages · generated by tools/build.py`;
-render();
+window.addEventListener('hashchange',route);
+route();
 })();
 </script>
 </body>
