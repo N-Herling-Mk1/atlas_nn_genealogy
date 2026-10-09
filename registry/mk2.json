@@ -631,7 +631,16 @@
  "id": "mk2",
  "label": "June 2026",
  "date": "2026-06",
+ "date_display": "JUN 2026",
+ "name": "Legacy (Schott 8.3.2)",
  "summary": "Legacy set (Schott thesis 8.3.2) with audit-verified _raw alternates for the 2026 reprocessed vintage.",
+ "notes": [
+  "Feature sets from Schott thesis Sec. 8.3.2: NN1 = energy / isolation, NN2 = spatial dR / timing / hits.",
+  "An entry may list audit-verified alternate names. In the 2026 reprocessed files (data24VR + mc23) region-agnostic features appear as <name>_raw; region-tagged features keep their original names.",
+  "Audit 2026-07-02 (check_nn_features_v3.py): 26/26 features resolved in all 10 files, both regions, no collisions.",
+  "Target polarity is inverted: bdt_target 0 = signal (H->ss MC), 1 = background (data VR). bdt_target and HTmiss are derived, not in the raw CSVs.",
+  "Preselection columns not yet audited against the 2026 headers."
+ ],
  "source": "sources/nn_features_mk2_v3.py",
  "questions": []
 }

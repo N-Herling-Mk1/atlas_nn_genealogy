@@ -1460,7 +1460,12 @@
  "id": "mk4",
  "label": "Sep 2026",
  "date": "2026-09-21",
+ "date_display": "SEP 21, 2026",
+ "name": "Prof. Johns - Sep review",
  "summary": "Prof. Johns Sep-21 review: per-feature barrel/endcap cross-check status, distribution comments, three NN1 isolation 'need' items.",
+ "notes": [
+  "NA"
+ ],
  "source": "sources/nn_variables_2026-09-21.xlsx",
  "questions": [
   "Cross-check 'significantly different' for MS1Vtx_barrel_hits_ntot, MS1Vtx_endcap_hits_ntot (both regions): whose definition is right? Blocks NN2 retrain?",

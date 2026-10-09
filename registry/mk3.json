@@ -802,7 +802,17 @@
  "id": "mk3",
  "label": "July 2026",
  "date": "2026-07",
+ "date_display": "JUL 2026",
+ "name": "Prof. Johns - July list",
  "summary": "Prof. Johns July sheet: 4 new barrel NN1 features; candidates and conceptual proposals tracked separately.",
+ "notes": [
+  "Amended with Prof. Johns' July-2026 sheet (barrel only).",
+  "4 new barrel NN1 features: msvtx_caloClusterSumPtScalar, msegUnAssoc_counts/nBIL, /nBML, /nBOL.",
+  "Candidates, not adopted: met_met_NOSYS (\"add?\"), msvtx_nRPC, and endcap twins of the 4 new barrel features.",
+  "Proposed NN2 concepts, no ntuple columns yet: clusters in dR, eta-phi of pT-weighted clusters, clusters < 300 MeV (count and %), NSW segment variables, njets, pT of closest-dR jet.",
+  "Sheet typos mapped onto existing names, not added as variants.",
+  "Endcap feature lists unchanged."
+ ],
  "source": "sources/nn_features_mk3_v3.py",
  "questions": [
   "Barrel NN2: adopt met_met_NOSYS ('add?') and msvtx_nRPC (untagged)?",

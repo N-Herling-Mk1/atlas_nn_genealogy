@@ -29,21 +29,52 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SRC, REG, DOCS = ROOT / "sources", ROOT / "registry", ROOT / "docs"
 
+# date_display : what the page shows (edit freely)
+# notes        : shown in the Notes block; mk2/mk3 condensed from the module
+#                docstrings in sources/*.py, ["NA"] when there are none yet
 VERSIONS = [
-    {"id": "mk2", "label": "June 2026", "date": "2026-06",
+    {"id": "mk2", "label": "June 2026", "date": "2026-06", "date_display": "JUN 2026",
+     "name": "Legacy (Schott 8.3.2)",
      "file": "nn_features_mk2_v3.py", "kind": "module",
      "summary": "Legacy set (Schott thesis 8.3.2) with audit-verified _raw "
-                "alternates for the 2026 reprocessed vintage."},
-    {"id": "mk3", "label": "July 2026", "date": "2026-07",
+                "alternates for the 2026 reprocessed vintage.",
+     "notes": [
+         "Feature sets from Schott thesis Sec. 8.3.2: NN1 = energy / isolation, "
+         "NN2 = spatial dR / timing / hits.",
+         "An entry may list audit-verified alternate names. In the 2026 reprocessed "
+         "files (data24VR + mc23) region-agnostic features appear as <name>_raw; "
+         "region-tagged features keep their original names.",
+         "Audit 2026-07-02 (check_nn_features_v3.py): 26/26 features resolved in all "
+         "10 files, both regions, no collisions.",
+         "Target polarity is inverted: bdt_target 0 = signal (H->ss MC), "
+         "1 = background (data VR). bdt_target and HTmiss are derived, not in the raw CSVs.",
+         "Preselection columns not yet audited against the 2026 headers.",
+     ]},
+    {"id": "mk3", "label": "July 2026", "date": "2026-07", "date_display": "JUL 2026",
+     "name": "Prof. Johns - July list",
      "file": "nn_features_mk3_v3.py", "kind": "module",
      "summary": "Prof. Johns July sheet: 4 new barrel NN1 features; "
-                "candidates and conceptual proposals tracked separately."},
-    {"id": "mk4", "label": "Sep 2026", "date": "2026-09-21",
+                "candidates and conceptual proposals tracked separately.",
+     "notes": [
+         "Amended with Prof. Johns' July-2026 sheet (barrel only).",
+         "4 new barrel NN1 features: msvtx_caloClusterSumPtScalar, "
+         "msegUnAssoc_counts/nBIL, /nBML, /nBOL.",
+         "Candidates, not adopted: met_met_NOSYS (\"add?\"), msvtx_nRPC, and endcap "
+         "twins of the 4 new barrel features.",
+         "Proposed NN2 concepts, no ntuple columns yet: clusters in dR, eta-phi of "
+         "pT-weighted clusters, clusters < 300 MeV (count and %), NSW segment "
+         "variables, njets, pT of closest-dR jet.",
+         "Sheet typos mapped onto existing names, not added as variants.",
+         "Endcap feature lists unchanged.",
+     ]},
+    {"id": "mk4", "label": "Sep 2026", "date": "2026-09-21", "date_display": "SEP 21, 2026",
+     "name": "Prof. Johns - Sep review",
      "file": "nn_variables_2026-09-21.xlsx", "kind": "kj_sheet",
      "inherits": "mk3",
      "summary": "Prof. Johns Sep-21 review: per-feature barrel/endcap "
                 "cross-check status, distribution comments, three NN1 "
-                "isolation 'need' items."},
+                "isolation 'need' items.",
+     "notes": ["NA"]},
 ]
 
 # KJ sheet spellings -> existing canonicals (never added as variants)
@@ -311,7 +342,7 @@ def main():
             rec = ingest_module(v)
         else:
             rec = ingest_kj_sheet(v, records[v["inherits"]])
-        rec.update({k: v[k] for k in ("id", "label", "date", "summary")})
+        rec.update({k: v[k] for k in ("id", "label", "date", "date_display", "name", "summary", "notes")})
         rec["source"] = f"sources/{v['file']}"
         rec["questions"] = open_questions(rec, v["id"])
         n = {s: sum(f["status"] == s for f in rec["features"])

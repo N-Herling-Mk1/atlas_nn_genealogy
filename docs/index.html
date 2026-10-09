@@ -47,12 +47,14 @@ button{font:inherit;color:inherit}
 .tl{position:relative;max-width:980px;margin:10px auto 0;padding:40px 16px 60px}
 .tl:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;
   background:linear-gradient(transparent,var(--blue) 40px,var(--green) 50%,var(--ares) calc(100% - 40px),transparent);opacity:.75}
-.ev{position:relative;display:flex;min-height:150px}
+.ev{position:relative;display:flex;min-height:150px;margin-bottom:36px}
+/* desktop: JS stacks entries so left/right interleave (see layout()) */
+.tl.packed .ev{position:absolute;left:16px;right:16px;margin:0;min-height:0}
 .ev .arm{position:absolute;top:34px;height:3px;background:var(--spine)}
 .ev .knot{position:absolute;left:50%;top:27px;width:17px;height:17px;margin-left:-8.5px;background:#000;border:3px solid var(--ink);transform:rotate(45deg)}
 .ev.l{justify-content:flex-start} .ev.r{justify-content:flex-end}
-.ev.l .arm{left:30%;right:50%} .ev.r .arm{left:50%;right:30%}
-.entry{width:30%;text-align:left;background:none;border:0;padding:0;cursor:pointer;line-height:1.55}
+.ev.l .arm{left:40%;right:50%} .ev.r .arm{left:50%;right:40%}
+.entry{width:40%;text-align:left;background:none;border:0;padding:0;cursor:pointer;line-height:1.55}
 .ev.l .entry{padding-right:18px} .ev.r .entry{padding-left:18px}
 .entry .d{font-family:var(--head);font-weight:900;font-size:17px;letter-spacing:.08em;color:var(--ares)}
 .entry .row{font-size:15px;letter-spacing:.04em}
@@ -64,6 +66,13 @@ button{font:inherit;color:inherit}
 .ev:has(.entry:hover) .knot{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 14px var(--yellow)}
 .ev.last .knot{background:var(--ares);border-color:var(--ares)}
 .ev:has(.entry:hover) .arm{background:var(--yellow)}
+.notes{margin-top:10px;border-left:2px solid var(--line);padding:4px 0 4px 12px}
+.notes .k{font-family:var(--head);font-weight:700;font-size:10px;letter-spacing:.2em;color:var(--yellow);margin-bottom:4px}
+.notes ul{margin:0;padding:0 0 0 14px;color:var(--mute);font-size:12.5px;line-height:1.5}
+.notes li{display:list-item;border:0;padding:1px 0;word-break:normal;grid-template-columns:none}
+.notes.na ul{list-style:none;padding:0}
+.pg .notes{margin:22px 0 4px;max-width:760px}
+.pg .notes ul{font-size:13.5px;color:#b9c3cc}
 .key{text-align:center;color:var(--mute);font-size:12px;letter-spacing:.08em;margin:0 0 70px}
 
 /* ---------- page 2: features ---------- */
@@ -100,6 +109,7 @@ li.gone{color:var(--mute);text-decoration:line-through}
   .ev .knot{left:10px;margin-left:-7px}
   .ev.l .arm,.ev.r .arm{left:12px;right:auto;width:30px}
   .entry,.ev.l .entry,.ev.r .entry{width:auto;margin-left:54px;padding:0}
+  .ev{margin-bottom:8px}
   .key{text-align:left;padding:0 16px 0 70px}
   .cols{grid-template-columns:1fr}
   .cols>div+div{margin-top:20px}
@@ -126,17 +136,22 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const conf=(v,net,reg)=>v.features.filter(f=>f.status==='confirmed'&&f.net===net&&f.region===reg).sort((a,b)=>a.position-b.position);
 const idx=id=>V.findIndex(v=>v.id===id);
 
+function notes(v){
+  const n=(v.notes&&v.notes.length)?v.notes:['NA'], na=n.length===1&&n[0]==='NA';
+  return `<div class="notes${na?' na':''}"><div class="k">NOTES</div><ul>${n.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
+}
 function timeline(){
   let h='<div class="tl">';
   V.forEach((v,i)=>{
     const side=i%2?'r':'l', n=(net,reg)=>conf(v,net,reg).length;
     h+=`<div class="ev ${side}${i===V.length-1?' last':''}"><div class="arm"></div><div class="knot"></div>
       <button class="entry" data-id="${v.id}" aria-label="Open ${esc(v.id)}">
-        <div class="d">${esc(v.date)}</div>
+        <div class="d">${esc(v.date_display||v.date)}</div>
         <div class="row n1">NN1 &nbsp;<span>${n('NN1','barrel')} &middot; ${n('NN1','endcap')}</span></div>
         <div class="row n2">NN2 &nbsp;<span>${n('NN2','barrel')} &middot; ${n('NN2','endcap')}</span></div>
         <div class="nm">${esc(v.name||'')}</div>
         <div class="id">${esc(v.id.toUpperCase())}</div>
+        ${notes(v)}
       </button></div>`;
   });
   h+='</div><p class="key">feature counts: barrel &middot; endcap &nbsp;&mdash;&nbsp; select a version</p>';
@@ -150,7 +165,7 @@ function features(id){
     <button data-go="">&larr; TIMELINE</button>
     <span><button data-go="${p?p.id:''}" ${p?'':'disabled'}>&lsaquo; ${p?esc(p.id.toUpperCase()):'—'}</button>
     &nbsp;&nbsp;<button data-go="${nx?nx.id:''}" ${nx?'':'disabled'}>${nx?esc(nx.id.toUpperCase()):'—'} &rsaquo;</button></span></div>
-    <div class="vh"><div class="d">${esc(v.id.toUpperCase())} &middot; ${esc(v.date)}</div><div class="nm">${esc(v.name||'')}</div></div>
+    <div class="vh"><div class="d">${esc(v.id.toUpperCase())} &middot; ${esc(v.date_display||v.date)}</div><div class="nm">${esc(v.name||'')}</div>${notes(v)}</div>
     <div class="dl"><span class="k">DOWNLOAD</span><button data-fmt="txt">.txt</button><button data-fmt="csv">.csv</button><button data-fmt="py">.py</button></div>`;
   for(const net of NETS){
     h+=`<section class="net ${net}"><h2>${net}</h2><div class="cols">`;
@@ -204,10 +219,28 @@ function download(v,fmt){
   document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
 }
 
+// interleave left/right entries: each entry starts as high as possible, but
+// every knot stays at least GAP below the previous one (chronology preserved)
+function layout(){
+  const tl=app.querySelector('.tl'); if(!tl) return;
+  const evs=[...tl.querySelectorAll('.ev')];
+  if(window.innerWidth<=700){tl.classList.remove('packed');tl.style.height='';evs.forEach(e=>e.style.top='');return;}
+  tl.classList.add('packed');
+  const GAP=110, SAME=40; let knot=40; const bottom={l:0,r:0};
+  evs.forEach((e,i)=>{
+    const side=e.classList.contains('l')?'l':'r';
+    const top=i===0?40:Math.max(knot+GAP, bottom[side]+SAME);
+    e.style.top=top+'px'; knot=top; bottom[side]=top+e.offsetHeight;
+  });
+  tl.style.height=(Math.max(bottom.l,bottom.r)+60)+'px';
+}
+window.addEventListener('resize',layout);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(layout);
+
 function route(){
   const id=decodeURIComponent(location.hash.slice(1));
   if(idx(id)>=0){features(id);document.title=`${id.toUpperCase()} · NN Feature Genealogy`;}
-  else{timeline();document.title='NN Feature Genealogy';}
+  else{timeline();layout();document.title='NN Feature Genealogy';}
   window.scrollTo(0,0);
 }
 window.addEventListener('hashchange',route);
