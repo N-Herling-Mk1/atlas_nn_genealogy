@@ -22,8 +22,9 @@ sources/    original files, never edited
 tools/      build.py: ingest -> verify -> lock -> emit (with progress prints)
 registry/   <mk>.json, generated and committed (git diff is the audit trail)
 docs/       index.html + generated data.js + copies of sources (the site)
-docs/assets badge sizes, favicon, social_card.png
-assets/     badge.png (full-res original)
+docs/assets header badge, favicon PNGs (16-64), apple-touch-icon, icon_192/512, social_card.png
+docs/favicon.svg  vector icon (master) -> python tools/render_icons.py -> favicon.ico + PNGs
+assets/     badge.png + favicon_src.png (full-res originals)
 tools/card/ social_card.html + render_card.py (re-render the card after edits)
 ```
 
